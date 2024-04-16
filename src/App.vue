@@ -18,7 +18,6 @@ export default {
     }
   },
   methods: {
-
   },
   mounted() {
   }
@@ -26,4 +25,12 @@ export default {
 
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@use './assets/scss/partials/_variables.scss' as *;
+
+#app {
+  background-color: $bg-main;
+  padding: 12px;
+  min-height: 100vh;
+}
+</style>
