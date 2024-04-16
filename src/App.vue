@@ -1,17 +1,23 @@
 <template>
-  <h1>{{ xx }}</h1>
-  <HelloWorld />
+  <AppHeader />
+  <AppMain />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { store } from './store.js';
+// import axios from 'axios'
+
+import AppHeader from './components/AppHeader.vue'
+import AppMain from './components/AppMain.vue'
 export default {
-  components: { HelloWorld },
+  components: { AppHeader,AppMain },
   data() {
     return {
+      store,
       xx: "Boolflix"
     }
-  }, methods: {
+  },
+  methods: {
     test() {
       console.log("ciao mondo");
     }
