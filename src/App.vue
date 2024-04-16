@@ -14,23 +14,16 @@ export default {
   components: { AppHeader, AppMain },
   data() {
     return {
-      store,
-      xx: "Boolflix"
+      store
     }
   },
   methods: {
-    test() {
-      console.log("ciao mondo");
-    }
 
   },
   mounted() {
-    this.test();
   }
 }
 
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

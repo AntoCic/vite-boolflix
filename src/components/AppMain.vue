@@ -9,7 +9,7 @@
         </div>
 
         <div class="col" v-for="tvSerie in tvSeries">
-          <AppCard :imgUrl="imgUrl(tvSerie)" :title="tvSerie.title" :originalTitle="tvSerie.original_title"
+          <AppCard :imgUrl="imgUrl(tvSerie)" :title="tvSerie.name" :originalTitle="tvSerie.original_name"
             :language="tvSerie.original_language" :vote="tvSerie.vote_average" />
         </div>
 

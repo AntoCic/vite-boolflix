@@ -40,7 +40,7 @@ export default {
           language:'it_IT'
         }
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         store.movieSearched = res.data;
       })
     },
@@ -52,7 +52,7 @@ export default {
           language:'it_IT'
         }
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         store.tvSeriesSearched = res.data;
       })
     }
