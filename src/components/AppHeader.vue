@@ -3,26 +3,27 @@
     <div class="container">
       <div class="row justify-content-between align-items-center mb-4">
         <div class="col-auto">
-          <button type="button" class="btn btn-dark me-1 btn-manu">
+          <button @click="$emit('toggleAside')" type="button" class="btn btn-dark me-1 btn-manu">
             <i class="bi bi-list fs-1"></i>
           </button>
-
-          <img :src="imgSrc('logo.svg')" class="logo">
+          <!-- <p class="text-white">{{  }}</p> -->
+          <img :src="vw > 768 ? imgSrc('logo.svg') : imgSrc('fav.png')" class="logo">
         </div>
 
 
         <div class="col-auto">
           <div class="d-flex gap-2 align-items-center">
             <div class="input-group">
-              <input v-model.trim="searchInput" @keyup.enter="search" type="text" :class="{ 'search-close': searchFocus }"
-                class="form-control bg-secondary bg-opacity-25 border-0 text-white">
-              <button type="button" @click="search" :class="{ 'search-btn-focus': !searchFocus }" class="btn btn-dark me-1 btn-manu">
-                <i class="bi bi-search fs-1"></i>
+              <input v-model.trim="searchInput" @keyup.enter="search" type="text"
+                :class="{ 'search-close': searchFocus }"
+                class="form-control bg-secondary bg-opacity-25 border-0 text-white search-open">
+              <button type="button" @click="search" :class="{ 'search-btn-focus': !searchFocus }"
+                class="btn btn-dark btn-manu ">
+                <i class="bi bi-search fs-4"></i>
               </button>
             </div>
             <img :src="imgSrc('avatar.png')" class="logo">
           </div>
-
         </div>
 
       </div>
@@ -36,10 +37,10 @@ import { store } from '../store.js';
 import axios from 'axios'
 
 export default {
+  props: ['searchFocus'],
   data() {
     return {
       searchInput: 'ritorno al futuro',
-      searchFocus: true
     }
   },
   methods: {
@@ -48,9 +49,9 @@ export default {
         this.getMovie();
         this.getTvSeries();
         this.searchInput = '';
-        this.searchFocus = true
-      }else{
-        this.searchFocus = !this.searchFocus
+        this.$emit('toggleSearch');
+      } else {
+        this.$emit('toggleSearch');
       }
 
     },
@@ -86,7 +87,10 @@ export default {
   computed: {
     apiKey() {
       return store.api_key
-    }
+    },
+    vw() {
+      return store.windowWidth
+    },
   }
 }
 
@@ -96,13 +100,17 @@ export default {
 @use '../assets/scss/partials/_variables.scss' as *;
 
 .logo {
-  height: 50px;
+  height: 40px;
 }
 
 .btn-manu {
   background-color: $bg-main;
   border-color: $bg-main;
-  // color: #2E3032;
+}
+
+.search-open {
+  width: 100px !important;
+  transition: width 1s;
 }
 
 .search-close {

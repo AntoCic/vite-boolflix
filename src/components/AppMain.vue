@@ -23,6 +23,7 @@
 import { store } from '../store.js';
 import flagToEmoji from '../assets/flag.json';
 
+
 import AppCard from './AppCard.vue'
 export default {
   components: { AppCard },
@@ -53,7 +54,9 @@ export default {
     tvSeries() {
       return store.tvSeriesSearched.results
     }
-  }
+  },
+
+
 }
 
 </script>
