@@ -14,7 +14,7 @@
         <div class="col-auto">
           <div class="d-flex gap-2 align-items-center">
             <div class="input-group">
-              <input v-model.trim="searchInput" @keyup.enter="search" type="text"
+              <input v-model.trim="searchInput" @keyup.enter="search" ref="input" type="text"
                 :class="{ 'search-close': searchFocus }"
                 class="form-control bg-secondary bg-opacity-25 border-0 text-white search-open">
               <button type="button" @click="search" :class="{ 'search-btn-focus': !searchFocus }"
@@ -54,6 +54,7 @@ export default {
         this.$emit('toggleSearch');
       } else {
         this.$emit('toggleSearch');
+        this.$refs.input.focus();
       }
 
     },
