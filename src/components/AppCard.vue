@@ -54,6 +54,7 @@ export default {
     &:hover+.body{
       bottom: 0;
     }
+    height: 100%;
   }
   .body{
     background-color: rgba(#fff, 0.9);

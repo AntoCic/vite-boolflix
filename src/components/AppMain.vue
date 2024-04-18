@@ -4,8 +4,9 @@
       <div class="row">
 
         <div class="col-12 position-relative">
-          <h2 class="text-white">Film</h2>
-          <div ref="eMovie" class="d-flex flex-nowrap overflow-x-auto">
+          <h2 class="text-white"><font-awesome-icon :icon="['fas', 'film']" /> Film</h2>
+          <p v-if="movies.length === 0" class="text-danger">Nessun film trovato</p>
+          <div v-if="movies.length !== 0" ref="eMovie" class="d-flex flex-nowrap overflow-x-auto">
             <button @click="scrollRight($refs.eMovie)" class="ms_btn-scroll right"><i
                 class="bi bi-caret-right-fill"></i></button>
             <button @click="scrollLeft($refs.eMovie)" class="ms_btn-scroll left"><i
@@ -17,12 +18,13 @@
         </div>
 
         <div class="col-12 position-relative">
-          <h2 class="text-white mt-3">Serie Tv</h2>
-          <button @click="scrollRight($refs.eTvSeries)" class="ms_btn-scroll right"><i
-              class="bi bi-caret-right-fill"></i></button>
-          <button @click="scrollLeft($refs.eTvSeries)" class="ms_btn-scroll left"><i
-              class="bi bi-caret-left-fill"></i></button>
-          <div ref="eTvSeries" class="d-flex flex-nowrap overflow-x-auto">
+          <h2 class="text-white mt-3"><font-awesome-icon :icon="['fas', 'tv']" /> Serie Tv</h2>
+          <p v-if="tvSeries.length === 0" class="text-danger">Nessuna serie trovata</p>
+          <div v-if="tvSeries.length !== 0" ref="eTvSeries" class="d-flex flex-nowrap overflow-x-auto">
+            <button @click="scrollRight($refs.eTvSeries)" class="ms_btn-scroll right"><i
+                class="bi bi-caret-right-fill"></i></button>
+            <button @click="scrollLeft($refs.eTvSeries)" class="ms_btn-scroll left"><i
+                class="bi bi-caret-left-fill"></i></button>
             <AppCard class="flex-shrink-0" v-for="movie in tvSeries" @click="setCurrentMovie(movie)"
               :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
               :language="movie.original_language" :vote="movie.vote_average" />

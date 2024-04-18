@@ -46,9 +46,11 @@ export default {
   methods: {
     search() {
       if (!this.searchFocus) {
-        this.getMovie();
-        this.getTvSeries();
-        this.searchInput = '';
+        if (this.searchInput != '') {
+          this.getMovie();
+          this.getTvSeries();
+          this.searchInput = '';
+        }
         this.$emit('toggleSearch');
       } else {
         this.$emit('toggleSearch');
@@ -76,7 +78,7 @@ export default {
           language: 'it_IT'
         }
       }).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         const parsedResults = res.data.results.map((x) => {
           const { adult,
             backdrop_path,
