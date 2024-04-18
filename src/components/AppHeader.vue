@@ -125,10 +125,6 @@ export default {
     },
   },
   mounted() {
-    this.search();
-    setTimeout(() => {
-      this.search();
-    }, 100);
     axios.get('https://api.themoviedb.org/3/discover/movie', {
       params: {
         api_key: this.apiKey,
