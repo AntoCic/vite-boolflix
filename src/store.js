@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { getCurrentInstance, reactive } from 'vue'
 
 window.addEventListener('resize', () => {
     store.windowWidth = window.innerWidth;
@@ -10,5 +10,6 @@ export const store = reactive({
     movieSearched: { results: [] },
     tvSeriesSearched: { results: [] },
     windowWidth: window.innerWidth,
-    windowHeight: window.innerHeight
+    windowHeight: window.innerHeight,
+    currentMovie:{},
 })

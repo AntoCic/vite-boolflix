@@ -65,6 +65,7 @@ export default {
       }).then((res) => {
         // console.log(res.data);
         store.movieSearched = res.data;
+        store.movieSearched.type = 'movie';
       })
     },
     getTvSeries() {
@@ -76,7 +77,36 @@ export default {
         }
       }).then((res) => {
         // console.log(res.data);
+        const parsedResults = res.data.results.map((x) => {
+          const { adult,
+            backdrop_path,
+            first_air_date,
+            genre_ids, id,
+            name,
+            original_language,
+            original_name,
+            overview,
+            popularity,
+            poster_path,
+            vote_average } = x;
+          return {
+            adult,
+            backdrop_path,
+            genre_ids,
+            id,
+            original_language,
+            original_title: original_name,
+            overview,
+            popularity,
+            poster_path,
+            release_date: first_air_date,
+            title: name,
+            vote_average
+          }
+        });
         store.tvSeriesSearched = res.data;
+        store.tvSeriesSearched.results = parsedResults;
+        store.movieSearched.type = 'tvSeries';
       })
     },
     imgSrc(nameFile) {

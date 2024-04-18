@@ -4,14 +4,15 @@
       <div class="row row-cols-3">
 
         <div class="col" v-for="movie in movies">
-          <AppCard :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
+          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
             :language="movie.original_language" :vote="movie.vote_average" />
         </div>
 
-        <div class="col" v-for="tvSerie in tvSeries">
-          <AppCard :imgUrl="imgUrl(tvSerie)" :title="tvSerie.name" :originalTitle="tvSerie.original_name"
-            :language="tvSerie.original_language" :vote="tvSerie.vote_average" />
+        <div class="col" v-for="movie in tvSeries">
+          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
+            :language="movie.original_language" :vote="movie.vote_average" />
         </div>
+        <!-- <AppMovie /> -->
 
       </div>
     </div>
@@ -25,8 +26,9 @@ import flagToEmoji from '../assets/flag.json';
 
 
 import AppCard from './AppCard.vue'
+import AppMovie from './AppMovie.vue'
 export default {
-  components: { AppCard },
+  components: { AppCard,AppMovie },
   data() {
     return {
       store,
@@ -45,6 +47,10 @@ export default {
         path = '/src/assets/img/not_found.png'
       }
       return path
+    },
+    setCurrentMovie(obj) {
+      store.currentMovie = obj
+      // console.log(store.currentMovie);
     },
   },
   computed: {
