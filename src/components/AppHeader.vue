@@ -40,7 +40,7 @@ export default {
   props: ['searchFocus'],
   data() {
     return {
-      searchInput: 'ritorno al futuro',
+      searchInput: 'ritorno',
     }
   },
   methods: {
@@ -121,6 +121,12 @@ export default {
     vw() {
       return store.windowWidth
     },
+  },
+  mounted() {
+    this.search();
+    setTimeout(() => {
+      this.search();
+    }, 100);
   }
 }
 

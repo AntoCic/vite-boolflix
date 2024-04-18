@@ -1,23 +1,20 @@
 <template>
   <main>
     <div class="container">
-      <div class="row row-cols-3">
-
+      <div v-show="!openMovie" class="row row-cols-3">
         <div class="col" v-for="movie in movies">
-          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
-            :language="movie.original_language" :vote="movie.vote_average" />
+          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title"
+            :originalTitle="movie.original_title" :language="movie.original_language" :vote="movie.vote_average" />
         </div>
 
         <div class="col" v-for="movie in tvSeries">
-          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
-            :language="movie.original_language" :vote="movie.vote_average" />
+          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title"
+            :originalTitle="movie.original_title" :language="movie.original_language" :vote="movie.vote_average" />
         </div>
-        <!-- <AppMovie /> -->
-
       </div>
     </div>
   </main>
-
+  <AppMovie @click="openMovie = !openMovie" v-if="openMovie" />
 </template>
 
 <script>
@@ -28,11 +25,12 @@ import flagToEmoji from '../assets/flag.json';
 import AppCard from './AppCard.vue'
 import AppMovie from './AppMovie.vue'
 export default {
-  components: { AppCard,AppMovie },
+  components: { AppCard, AppMovie },
   data() {
     return {
       store,
-      flagToEmoji
+      flagToEmoji,
+      openMovie: false,
     }
   },
   methods: {
@@ -50,7 +48,7 @@ export default {
     },
     setCurrentMovie(obj) {
       store.currentMovie = obj
-      // console.log(store.currentMovie);
+      this.openMovie = !this.openMovie
     },
   },
   computed: {
@@ -61,6 +59,9 @@ export default {
       return store.tvSeriesSearched.results
     }
   },
+  mounted() {
+
+  }
 
 
 }
