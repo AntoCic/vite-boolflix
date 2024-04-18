@@ -63,6 +63,10 @@ export default {
     left: 0;
     bottom: -300px;
     transition: bottom 0.3s;
+
+    &:hover{
+      bottom: 0;
+    }
     
     .title{
       font-size: 1.5em;

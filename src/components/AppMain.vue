@@ -1,20 +1,37 @@
 <template>
   <main>
-    <div class="container">
-      <div v-show="!openMovie" class="row row-cols-3">
-        <div class="col" v-for="movie in movies">
-          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title"
-            :originalTitle="movie.original_title" :language="movie.original_language" :vote="movie.vote_average" />
+    <div class="container" v-show="!openMovie">
+      <div class="row">
+
+        <div class="col-12 position-relative">
+          <h2 class="text-white">Film</h2>
+          <div ref="eMovie" class="d-flex flex-nowrap overflow-x-auto">
+            <button @click="scrollRight($refs.eMovie)" class="ms_btn-scroll right"><i
+                class="bi bi-caret-right-fill"></i></button>
+            <button @click="scrollLeft($refs.eMovie)" class="ms_btn-scroll left"><i
+                class="bi bi-caret-left-fill"></i></button>
+            <AppCard class="flex-shrink-0" v-for="movie in movies" @click="setCurrentMovie(movie)"
+              :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
+              :language="movie.original_language" :vote="movie.vote_average" />
+          </div>
         </div>
 
-        <div class="col" v-for="movie in tvSeries">
-          <AppCard @click="setCurrentMovie(movie)" :imgUrl="imgUrl(movie)" :title="movie.title"
-            :originalTitle="movie.original_title" :language="movie.original_language" :vote="movie.vote_average" />
+        <div class="col-12 position-relative">
+          <h2 class="text-white mt-3">Serie Tv</h2>
+          <button @click="scrollRight($refs.eTvSeries)" class="ms_btn-scroll right"><i
+              class="bi bi-caret-right-fill"></i></button>
+          <button @click="scrollLeft($refs.eTvSeries)" class="ms_btn-scroll left"><i
+              class="bi bi-caret-left-fill"></i></button>
+          <div ref="eTvSeries" class="d-flex flex-nowrap overflow-x-auto">
+            <AppCard class="flex-shrink-0" v-for="movie in tvSeries" @click="setCurrentMovie(movie)"
+              :imgUrl="imgUrl(movie)" :title="movie.title" :originalTitle="movie.original_title"
+              :language="movie.original_language" :vote="movie.vote_average" />
+          </div>
         </div>
       </div>
     </div>
+    <AppMovie @click="openMovie = !openMovie" v-if="openMovie" />
   </main>
-  <AppMovie @click="openMovie = !openMovie" v-if="openMovie" />
 </template>
 
 <script>
@@ -50,6 +67,12 @@ export default {
       store.currentMovie = obj
       this.openMovie = !this.openMovie
     },
+    scrollRight(e) {
+      e.scrollLeft += 300;
+    },
+    scrollLeft(e) {
+      e.scrollLeft -= 300;
+    },
   },
   computed: {
     movies() {
@@ -68,4 +91,41 @@ export default {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.ms_btn-scroll {
+  position: absolute;
+  background: rgb(255, 255, 255);
+
+  z-index: 1;
+  border: none;
+  font-size: 50px;
+  height: 450px;
+  bottom: 0px;
+
+  &.left {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%);
+    padding-right: 30px;
+  }
+
+  &.right {
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%);
+    padding-left: 30px;
+    right: 0;
+  }
+
+  &:hover {
+    color: gray;
+    background: rgb(255, 255, 255);
+  }
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  user-select: none
+}
+</style>
